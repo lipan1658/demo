@@ -2,14 +2,18 @@ package com.lpan.demo.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -18,6 +22,7 @@ public class Person {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 	
 	private String name;
@@ -26,6 +31,14 @@ public class Person {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
+	
+	/*
+	 * 多对一
+	 * referencedColumnName 关联字段
+	 */
+	@ManyToOne
+	@JoinColumn(name = "address_id",referencedColumnName = "address_id")
+	private Address address;
 
 	public Integer getId() {
 		return id;
@@ -59,10 +72,18 @@ public class Person {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", age=" + age + ", createTime=" + createTime + "]";
+		return JSON.toJSONString(this);
 	}
 	
 }

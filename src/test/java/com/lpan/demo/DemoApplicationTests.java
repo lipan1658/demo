@@ -2,8 +2,10 @@ package com.lpan.demo;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,9 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.lpan.demo.dao.AddressRepository;
 import com.lpan.demo.dao.PersonRepository;
+import com.lpan.demo.entity.Address;
 import com.lpan.demo.entity.Person;
 import com.lpan.demo.utils.SpecificationUtils;
 
@@ -26,6 +30,9 @@ class DemoApplicationTests {
 	
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Test
 	void contextLoads() {
@@ -154,6 +161,42 @@ class DemoApplicationTests {
 	public void sqlQueryByNamedParams() {
 		Person person = personRepository.findPersonByNamedParams("A", 13);
 		System.out.println(person);
+	}
+	
+	@Test
+	public void deleteAllTest() {
+		personRepository.deleteAll();
+	}
+	
+	@Test
+	public void deteleAllAddressTest() {
+		addressRepository.deleteAll();
+	}
+	
+	/**
+	 * 级联保存
+	 */
+	@Test
+	public void saveCasCade() {
+		for(int i=0;i<10;i++) {
+			String string = String.valueOf((char)('A'+i));
+			//创建person
+			Person person = new Person();
+			person.setName(string);
+			person.setAge(25);
+			person.setCreateTime(new Date());
+			//创建address
+			Address address = new Address();
+			address.setAddressName(string);
+			address.setCity("City"+string);
+			//维护多对一
+			person.setAddress(address);
+			Set<Person> personSet = new HashSet<Person>();
+			personSet.add(person);
+			//维护一对多
+			address.setPersons(personSet);
+			addressRepository.save(address);
+		}
 	}
 	
 
