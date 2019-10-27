@@ -1,11 +1,13 @@
 package com.lpan.demo.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +18,10 @@ import com.alibaba.fastjson.JSON;
 
 @Entity
 @Table(name = "d_address")
-public class Address {
+public class Address implements Serializable{
 	
+	private static final long serialVersionUID = 1988827941043533061L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "address_id")

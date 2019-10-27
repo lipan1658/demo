@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -196,6 +197,19 @@ class DemoApplicationTests {
 			//维护一对多
 			address.setPersons(personSet);
 			addressRepository.save(address);
+		}
+		
+	}
+	
+	@Test
+	public void queryPersonTest() {
+		Person entity = new Person();
+		entity.setId(45);
+		Example<Person> example = Example.of(entity);
+		Optional<Person> optional = personRepository.findOne(example);
+		if(optional.isPresent()) {
+			Person person = optional.get();
+			System.out.println(person.toString());
 		}
 	}
 	

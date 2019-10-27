@@ -1,9 +1,11 @@
 package com.lpan.demo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,12 +16,18 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "d_person")
-public class Person {
+public class Person implements Serializable{
 	
+	private static final long serialVersionUID = -4903880212440881766L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -64,7 +72,8 @@ public class Person {
 		this.age = age;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//日期格式化
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -73,6 +82,8 @@ public class Person {
 		this.createTime = createTime;
 	}
 	
+	//序列化时忽略
+	@JSONField(serialize = false)
 	public Address getAddress() {
 		return address;
 	}

@@ -120,7 +120,7 @@ public class SpecificationUtils {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> void handleOperator(Root<T> root, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates, String fieldName, Operator operator,Object value) {
+	private static <T> void handleOperator(Root<T> root, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates, String fieldName, Operator operator,Object value) {
 		switch (operator) {
 		case EQ:
 			predicates.add(criteriaBuilder.equal(root.get(fieldName), value));
@@ -266,7 +266,7 @@ public class SpecificationUtils {
 
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> void handleOperatorJoin(Root<T> root, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates, String fieldName, Operator operator,Object value) {
+	private static <T> void handleOperatorJoin(Root<T> root, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates, String fieldName, Operator operator,Object value) {
 		String[] strings = fieldName.split("\\.");
 		Join<Object, Object> join = root.join(strings[0], JoinType.LEFT);
 		switch (operator) {
@@ -414,7 +414,7 @@ public class SpecificationUtils {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> void handleIsType(Root<T> root, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates, String fieldName, IsType isType) {
+	private static <T> void handleIsType(Root<T> root, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates, String fieldName, IsType isType) {
 		Expression expression = null;
 		if (fieldName.contains(".")) {
 			String[] split = fieldName.split("\\.");
@@ -444,7 +444,7 @@ public class SpecificationUtils {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> void handleOperator(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates) {
+	private static <T> void handleOperator(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates) {
 		Set<String> keySet = map.keySet();
 		for (String string : keySet) {
 			String[] strings = string.split("_");
@@ -571,7 +571,7 @@ public class SpecificationUtils {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static <T> void handleIsType(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates) {
+	private static <T> void handleIsType(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder, Map<String, Object> map, List<Predicate> predicates) {
 		Expression expression = null;
 		Set<String> keySet = map.keySet();
 		for (String string : keySet) {
@@ -606,7 +606,7 @@ public class SpecificationUtils {
 		}
 	}
 
-	public static Date parseDate(String str, String format) throws ParseException {
+	private static Date parseDate(String str, String format) throws ParseException {
 		DateFormat df = new SimpleDateFormat(format);
 		Date date = df.parse(str);
 		return date;

@@ -10,6 +10,7 @@ spring:
           auto: update
         dialect: org.hibernate.dialect.MySQL57Dialect
         format_sql: true
-    show-sql: true      
+    show-sql: true
+logging:  level:    org.hibernate.type.descriptor.sql.BasicBinder: TRACE      
   
   
