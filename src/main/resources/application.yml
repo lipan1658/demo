@@ -21,13 +21,18 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true  
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500  jpa:
+    open-in-view: false
     properties:
       hibernate:
         hbm2ddl:
           auto: update
         dialect: org.hibernate.dialect.MySQL57Dialect
         format_sql: true
-    show-sql: true  profiles:    active:    - dev
+    show-sql: true  profiles:    active:    - dev  thymeleaf:    prefix: classpath:/templates
+    suffix: .html
+    cache: false
+    encoding: UTF-8
+    servlet:      content-type: text/html; charset=utf-8
 logging:  level:    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 

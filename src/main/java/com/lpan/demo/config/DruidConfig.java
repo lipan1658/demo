@@ -19,7 +19,6 @@ public class DruidConfig {
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource getDataSource() {
 		DruidDataSource dataSource = new DruidDataSource();
-		System.out.println(dataSource);
 		return dataSource;
 	}
 	
