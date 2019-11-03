@@ -28,7 +28,7 @@ spring:
           auto: update
         dialect: org.hibernate.dialect.MySQL57Dialect
         format_sql: true
-    show-sql: true  profiles:    active:    - dev  thymeleaf:    prefix: classpath:/templates
+    show-sql: true  profiles:    active:    - dev  thymeleaf:    prefix: classpath:/templates/
     suffix: .html
     cache: false
     encoding: UTF-8
