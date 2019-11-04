@@ -1,0 +1,55 @@
+[{
+	"id": 1001,
+	"text": "系统管理",
+	"href": null,
+	"icon": "fa-calendar-plus-o",
+	"nodes": [{
+		"id": 1002,
+		"text": "角色管理",
+		"href": null,
+		"icon": "",
+		"nodes": []
+	}, {
+		"id": 1003,
+		"text": "用户管理",
+		"href": "/pages/tab/tab_content.html",
+		"icon": "",
+		"nodes": []
+	}, {
+		"id": 1003,
+		"text": "菜单管理",
+		"href": null,
+		"icon": "",
+		"nodes": []
+	}]
+}, {
+	"id": 1004,
+	"text": "组织结构",
+	"href": null,
+	"icon": "fa-reorder",
+	"nodes": [{
+		"id": 1005,
+		"text": "部门管理",
+		"href": null,
+		"icon": "",
+		"nodes": [{
+			"id": 1006,
+			"text": "人员管理",
+			"icon": "",
+			"href": null,
+			"nodes": []
+		}]
+	}]
+}, {
+	"id": 1007,
+	"text": "系统管理",
+	"href": null,
+	"icon": "fa-reorder",
+	"nodes": [{
+		"id": 1008,
+		"text": "人员管理",
+		"href": "/test/test2",
+		"icon": "",
+		"nodes": []
+		}]
+}]

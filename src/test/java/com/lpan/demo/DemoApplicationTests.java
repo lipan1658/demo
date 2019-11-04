@@ -23,7 +23,10 @@ import org.springframework.data.jpa.domain.Specification;
 import com.lpan.demo.dao.AddressRepository;
 import com.lpan.demo.dao.PersonRepository;
 import com.lpan.demo.entity.Address;
+import com.lpan.demo.entity.Menu;
 import com.lpan.demo.entity.Person;
+import com.lpan.demo.service.MenuService;
+import com.lpan.demo.service.PersonService;
 import com.lpan.demo.utils.SpecificationUtils;
 
 @SpringBootTest
@@ -34,6 +37,9 @@ class DemoApplicationTests {
 	
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	@Autowired
+	private MenuService menuService;
 
 	@Test
 	void contextLoads() {
@@ -211,6 +217,12 @@ class DemoApplicationTests {
 			Person person = optional.get();
 			System.out.println(person.toString());
 		}
+	}
+	
+	@Test
+	public void testMenu() {
+		List<Menu> list = menuService.findMenuListByPidAndStatus(1001);
+		System.out.println(list);
 	}
 	
 

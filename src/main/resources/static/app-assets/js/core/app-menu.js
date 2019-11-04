@@ -50,8 +50,10 @@
               }
               setTimeout(function(){
                 // $.app.menu.container.scrollTop(position.top);
-                $.app.menu.container.stop().animate({scrollTop:position.top}, 300);
-                $('.main-menu').data('scroll-to-active', 'false');
+            	if(!!position){
+            		$.app.menu.container.stop().animate({scrollTop:position.top}, 300);
+            		$('.main-menu').data('scroll-to-active', 'false');
+            	}
               },300);
           }
           $(".main-menu-content").perfectScrollbar('update');

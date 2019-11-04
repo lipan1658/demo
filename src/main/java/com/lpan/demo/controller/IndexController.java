@@ -12,5 +12,14 @@ public class IndexController {
 	public String index() {
 		return "html/index";
 	}
+	@GetMapping("/index2")
+	public String index2() {
+		return "html/index2";
+	}
+	
+	@GetMapping("/basicForm")
+	public String basicForm() {
+		return "html/form-layout-basic";
+	}
 
 }

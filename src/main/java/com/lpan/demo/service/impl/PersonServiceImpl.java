@@ -14,11 +14,11 @@ import com.lpan.demo.service.PersonService;
 public class PersonServiceImpl implements PersonService{
 	
 	@Autowired
-	private PersonRepository personService;
+	private PersonRepository personRepository;
 
 	@Override
 	public List<Person> findAllBySort(Sort sort) {
-		return personService.findAll(sort);
+		return personRepository.findAll(sort);
 	}
 
 }
