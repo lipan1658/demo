@@ -1,5 +1,6 @@
 package com.lpan.demo.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,11 +16,14 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "d_sys_menu")
-public class Menu {
+public class Menu implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -66,6 +70,7 @@ public class Menu {
 	}
 
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	public Date getCreateDate() {
 		return createDate;
 	}

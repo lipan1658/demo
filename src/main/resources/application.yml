@@ -21,6 +21,7 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true  
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500  jpa:
+    database: MYSQL
     open-in-view: false
     properties:
       hibernate:
@@ -34,6 +35,10 @@ spring:
     encoding: UTF-8
     servlet:      content-type: text/html; charset=utf-8
 logging:  level:    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.engine.QueryParameters: DEBUG
+    org.hibernate.type.descriptor.sql.BasicExtractor: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.engine.query.HQLQueryPlan: DEBUG
 
 
 
