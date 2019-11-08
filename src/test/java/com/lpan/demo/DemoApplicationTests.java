@@ -1,11 +1,14 @@
 package com.lpan.demo;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -21,10 +24,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.lpan.demo.dao.AddressRepository;
+import com.lpan.demo.dao.GradeRepository;
 import com.lpan.demo.dao.PersonRepository;
+import com.lpan.demo.dao.StudentRepository;
 import com.lpan.demo.entity.Address;
+import com.lpan.demo.entity.Grade;
 import com.lpan.demo.entity.Menu;
 import com.lpan.demo.entity.Person;
+import com.lpan.demo.entity.Student;
 import com.lpan.demo.service.MenuService;
 import com.lpan.demo.service.PersonService;
 import com.lpan.demo.utils.SpecificationUtils;
@@ -40,6 +47,12 @@ class DemoApplicationTests {
 	
 	@Autowired
 	private MenuService menuService;
+	
+	@Autowired
+	private StudentRepository studentRepository;
+	
+	@Autowired
+	private GradeRepository gradeRepository;
 
 	@Test
 	void contextLoads() {
@@ -225,5 +238,48 @@ class DemoApplicationTests {
 		System.out.println(list);
 	}
 	
+	
+	@Test
+	public void saveStudent() {
+		Student s = new Student();
+		s.setStudentName("S001");
+		s.setGender("0");
+		s.setBirthDate(Calendar.getInstance().getTime());
+		s.setCreateDate(Calendar.getInstance().getTime());
+		Random random = new Random();
+		List<Grade> gradeList = new ArrayList<Grade>();
+		for(int i=0;i<5;i++) {
+			Grade grade = new Grade();
+			String string = String.valueOf((char)('A'+i));
+			grade.setSemester("2019");
+			grade.setSubject(string);
+			grade.setScore(random.nextInt(100));
+			grade.setCreateDate(Calendar.getInstance().getTime());
+			grade.setStudent(s);
+			gradeList.add(grade);
+		}
+		s.setGrades(gradeList);
+		studentRepository.save(s);
+	}
+	
+	@Test
+	public void testDeleteStudent() {
+		Student s = new Student();
+		s.setStudentId(1);
+		studentRepository.delete(s);
+	}
+	
+	@Test
+	public void testStudentUpdate() {
+		Optional<Student> optional = studentRepository.findById(2);
+		if(optional.isPresent()) {
+			Student student = optional.get();
+			System.out.println(student);
+			student.setStudentName(student.getStudentName()+"222");
+			Student student2 = studentRepository.save(student);
+			System.out.println(student2);
+		}
+		
+	}
 
 }
