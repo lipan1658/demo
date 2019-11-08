@@ -1,0 +1,104 @@
+<form class="form-inline">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 form-group">
+		    <label for="exampleInputName2">Name</label>
+		    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+	    </div>
+		<div class="col-sm-3 form-group">
+			<label for="exampleInputName2">Name</label>
+		    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+		</div>
+		<div class="col-sm-3 form-group">
+			<label for="exampleInputName2">Name</label>
+		    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+		</div>
+		<div class="col-sm-3 form-group">
+			<button type="button" class="btn btn-default">查询</button>
+		</div>
+	</div>
+</div>
+</form>
+<table id="table" class="table-bordered"></table>
+<script>
+	function remove(menuId){
+		$.ajax({
+		   type: "get",
+		   url: context+"sys/deleteById?menuId="+menuId,
+		   success: function(msg){
+		     alert( "Data Saved: " + msg );
+		     console.info(msg);
+		   }
+		});
+	}
+	$('#table').bootstrapTable({
+		url: context+'sys/findAllByPage',
+		method : 'get',
+		pagination: true,//��ҳ
+		search: false,//��ѯ��
+		classes:'table table-bordered table-hover table-striped',
+		theadClasses:'thead-light',
+		rowStyle:function(row,index){
+			return {
+				css:{
+					color:'red'
+				}
+			}
+		},
+		rowAttributes:function(){
+			return null;
+		},
+		undefinedText:'',
+		locale:'zh_CN',
+		sortable:true,
+		silentSort: true,
+		sortName:'menuId',
+		sortOrder:'asc',
+		pageNumber: 1,
+        pageSize: 5,
+        pageList: [10, 25, 50, 100],
+        queryParamsType: '',
+        queryParams: function queryParams(params){
+            var param = {    
+                 pageNumber: params.pageNumber,    
+                 pageSize: params.pageSize,
+                 sortName: params.sortName,
+                 sortOrder: params.sortOrder
+             };    
+             return param;    
+        },
+        sidePagination:'server',
+        paginationHAlign:'right',
+		columns: [{
+		  field: 'menuId',
+		  title: 'menuId',
+		  sortable:true
+		}, {
+		  field: 'menuName',
+		  title: 'menuName'
+		}, {
+		  field: 'iconCls',
+		  title: 'iconCls'
+		}, {
+		  field: 'pid',
+		  title: 'pid'
+		}, {
+		  field: 'url',
+		  title: 'url'
+		},{
+		  field: 'status',
+		  title: 'status'
+		},{
+		  field: 'createDate',
+		  title: 'createDate'
+		},{
+		  field: 'operate',
+		  title: '操作',
+		  align: 'center',
+		  formatter:function(v,r,i){
+			  console.info(r);
+			  return '<a href="#">编辑</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="remove('+r.menuId+')">删除</a>';  
+		  }
+		}]
+	})
+</script>
