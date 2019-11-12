@@ -1,0 +1,91 @@
+<form class="form-inline">
+<div class="container-fluid">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-sm-4 form-group">
+			    <label for="studentName">姓名</label>
+			    <input type="text" class="form-control" id=studentName placeholder="姓名">
+		    </div>
+			<div class="col-sm-4 form-group">
+				<label for="gender">性别</label>
+			    <input type="text" class="form-control" id="gender" placeholder="性别">
+			</div>
+			<div class="col-sm-4 form-group">
+				<label for="birthDate">出生日期</label>
+			    <input type="text" class="form-control" id="birthDate" placeholder="出生日期">
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<div>
+	<button type="button" class="btn btn-info btn-sm">新增</button>
+	<button type="button" class="btn btn-info btn-sm">删除</button>
+</div>
+<table id="table" class="table-bordered" style="overflow: auto;"></table>
+<script>
+	$('#table').bootstrapTable({
+		url: context+'grade/findAll',
+		method : 'get',
+		height: 500,
+		pagination: false,
+		search: false,
+		singleSelect: true,
+		editable: true,
+		idField: 'studentId',
+		classes:'table table-bordered table-hover',
+		theadClasses:'thead-light',
+		rowStyle:function(row,index){
+			return {
+				css:{
+					color:'red'
+				}
+			}
+		},
+		rowAttributes:function(){
+			return null;
+		},
+		undefinedText:'',
+		locale:'zh_CN',
+		sortable:true,
+		silentSort: true,
+		sortName:'menuId',
+		sortOrder:'asc',
+	    queryParamsType: '',
+	    queryParams: function queryParams(params){
+	        var param = {    
+	             pageNumber: params.pageNumber,    
+	             pageSize: params.pageSize,
+	             sortName: params.sortName,
+	             sortOrder: params.sortOrder
+	         };    
+	         return param;    
+	    },
+		columns: [{
+		  radio:true
+		}, {
+		  field: 'gradeId',
+		  title: 'gradeId'
+		}, {
+		  field: 'semester',
+		  title: 'semester',
+		  editable: {
+              type: 'text',  
+              validate: function (value) {  
+                  if ($.trim(value) == '') {  
+                      return '展示名称不能为空!';  
+                  }  
+              }
+          }
+		}, {
+		  field: 'subject',
+		  title: 'subject'
+		}, {
+		  field: 'score',
+		  title: 'score'
+		}, {
+		  field: 'createDate',
+		  title: 'createDate'
+		}]
+	})
+</script>

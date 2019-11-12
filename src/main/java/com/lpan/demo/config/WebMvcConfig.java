@@ -2,15 +2,14 @@ package com.lpan.demo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class ConversionServiceConfig extends WebMvcConfigurationSupport{
+public class WebMvcConfig implements WebMvcConfigurer{
 
 	@Override
-	protected void addFormatters(FormatterRegistry registry) {
+	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(new StringToDateConverter());
+		WebMvcConfigurer.super.addFormatters(registry);
 	}
-	
-
 }
